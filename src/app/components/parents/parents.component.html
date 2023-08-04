@@ -1,52 +1,9 @@
-<!-- <div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search by title"
-          [(ngModel)]="title"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="searchTitle()"
-          >
-            Search
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <h4>Tutorials List</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let parent of parents; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveParents(parent, i)"
-        >
-          {{ parent.name_parents }}
-        </li>
-      </ul>
-  
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllParents()">
-        Remove All
-      </button>
-    </div>
-    <div class="col-md-6">
-      <app-tutorial-details
-        [viewMode]="true"
-        [currentTutorial]="currentTutorial"
-      ></app-tutorial-details>
-    </div>
-  </div> -->
-<!-- parents.component.html -->
-<!-- parents.component.html -->
+
 <div *ngFor="let parent of parents">
   <!-- Aquí puedes acceder a las propiedades de cada objeto "parent" en el array -->
-  <h3>{{ parent.username_parents }}</h3>
-  <p>{{ parent.name_parents }}</p>
+  <h2>{{ parent.username_parents }}</h2>
+  <p>{{ parent.name_parents }} {{ parent.surname_parents }}</p>
   <!-- ... otras propiedades de "parent" que quieras mostrar ... -->
 </div>
+
+<app-parents-children [children]="children"></app-parents-children>

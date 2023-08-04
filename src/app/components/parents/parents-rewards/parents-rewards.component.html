@@ -1,0 +1,26 @@
+<p *ngIf="children">{{ children.name_children }} {{ children.surname_children }}</p>
+
+<mat-card *ngFor="let reward of rewards" class="rewards-card">
+    <mat-card-header>
+        <mat-card-title>{{ reward.reward_rewards }}</mat-card-title>
+        <mat-card-subtitle>{{ reward.coins_rewards }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="example-button-container">
+        <button mat-button>
+            <mat-icon>done</mat-icon>
+        </button>
+        <button mat-button>
+            <mat-icon>move_to_inbox</mat-icon>
+        </button>
+        <button mat-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
+<mat-card class="rewards-card">
+    <mat-card-actions class="example-button-container">
+        <button mat-button>
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
