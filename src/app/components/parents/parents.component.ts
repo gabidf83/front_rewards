@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin, map } from 'rxjs';
 import { Children } from 'src/app/models/children.model';
 import { Parents } from 'src/app/models/parents.model';
@@ -18,30 +19,23 @@ export class ParentsComponent implements OnInit{
   parents: Parents[] = [];
   children: Children[] = [];
   tasks: Tasks[] = [];
-
+  parentId: string = '';
 
   constructor(
     private parentsService: ParentsService,
-    private childrenService: ChildrenService
+    private childrenService: ChildrenService,
+    private activatedRoute: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
-    this.retrieveParent();
+    this.activatedRoute.params.subscribe(params => {
+      this.parentId = params['id'];
+    });
+    this.retrieveParent(this.parentId);
   }
 
-  // retrieveParents(): void {
-  //   this.parentsService.getAll().subscribe({
-  //     next: (data: any) => {
-  //       // Convierte el JSON a un array de objetos Parents usando Object.values()
-  //       this.parents = Object.values(data);
-  //       console.log(this.parents);
-  //     },
-  //     error: (error) => console.log(error)
-  //   });
-  // }
-
-  retrieveParent(): void {
-    this.parentsService.get("64abca432a13c8cff35415a5").subscribe({
+  retrieveParent(parentId: string): void {
+    this.parentsService.get(parentId).subscribe({
       next: (data: any) => {
         this.parents = Object.values(data);
         
@@ -71,12 +65,5 @@ export class ParentsComponent implements OnInit{
       map((data: any) => data.existingChildren as Children) // Accedemos a los objetos Children dentro de existingChildren
     );
   }
-  
-  // retrieveTasks(id_children: string): Observable<Tasks>{
-  //   return this.tasksService.get(id_children).pipe(
-  //     map((data: any) => data.existingTasks as Tasks)
-  //   );
-  // }
-  
 
 }

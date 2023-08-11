@@ -1,0 +1,24 @@
+<div class="login-container">
+    <div class="parent-login">
+      <h2>Parent Login</h2>
+      <label for="parentUsername">Username:</label>
+      <input type="text" id="parentUsername" [(ngModel)]="parentUsername">
+      <br><br>
+      <label for="parentPassword">Password:</label>
+      <input type="password" id="parentPassword" [(ngModel)]="parentPassword">
+      <br><br>
+      <button (click)="parentLogin()">Login as Parent</button>
+    </div>
+    
+    <div class="child-login">
+      <h2>Child Login</h2>
+      <label for="childUsername">Username:</label>
+      <input type="text" id="childUsername" [(ngModel)]="childUsername">
+      <br><br>
+      <label for="childPassword">Password:</label>
+      <input type="password" id="childPassword" [(ngModel)]="childPassword">
+      <br><br>
+      <button (click)="childLogin()">Login as Child</button>
+    </div>
+  </div>
+  

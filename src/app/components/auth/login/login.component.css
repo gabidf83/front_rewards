@@ -1,0 +1,18 @@
+.login-container {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: 0 auto;
+  }
+  
+  .parent-login, .child-login {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .parent-login h2, .child-login h2 {
+    margin-bottom: 10px;
+  }
+  

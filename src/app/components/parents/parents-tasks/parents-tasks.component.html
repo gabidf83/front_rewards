@@ -1,26 +1,110 @@
 <p *ngIf="children">{{ children.name_children }} {{ children.surname_children }}</p>
-
-<mat-card *ngFor="let task of tasks" class="tasks-card">
-    <mat-card-header>
-        <mat-card-title>{{ task.task_tasks }}</mat-card-title>
-        <mat-card-subtitle>{{ task.coins_tasks }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions class="example-button-container">
-        <button mat-button>
-            <mat-icon>done</mat-icon>
-        </button>
-        <button mat-button>
-            <mat-icon>move_to_inbox</mat-icon>
-        </button>
-        <button mat-button>
-            <mat-icon>delete</mat-icon>
-        </button>
-    </mat-card-actions>
-</mat-card>
-<mat-card class="tasks-card">
-    <mat-card-actions class="example-button-container">
-        <button mat-button>
-            <mat-icon>add</mat-icon>
-        </button>
-    </mat-card-actions>
-</mat-card>
+<div class="tasks-container">
+    <mat-card *ngFor="let task of tasks" class="tasks-card">
+        <div *ngIf="task.done_tasks==false && task.active_tasks">
+            <mat-card-header>
+                <mat-card-title>{{ task.task_tasks }}</mat-card-title>
+                <mat-card-subtitle>{{ task.coins_tasks }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="example-button-container">
+                <button mat-button (click)="doneTask(task)">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-button (click)="editTask(task)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="activeTask(task)">
+                    <mat-icon>move_to_inbox</mat-icon>
+                </button>
+                <button mat-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+    <mat-card class="tasks-card">
+        <mat-card-actions class="example-button-container">
+            <button mat-button (click)="addTask()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-card-actions>
+        <div *ngIf="showAddForm" class="add-form">
+            <mat-form-field>
+              <input matInput placeholder="Nombre de la tarea" [(ngModel)]="newTask.task_tasks">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Coins de la tarea" [(ngModel)]="newTask.coins_tasks">
+            </mat-form-field>
+            <!-- Agrega más inputs para otros campos de la nueva tarea si es necesario -->
+          
+            <button mat-button (click)="saveNewTask()">Guardar</button>
+            <button mat-button (click)="cancelAddTask()">Cancelar</button>
+          </div>
+        <mat-card *ngIf="selectedTask" class="tasks-card form-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <input [(ngModel)]="selectedTask.task_tasks" placeholder="Nombre de la tarea">
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <input [(ngModel)]="selectedTask.coins_tasks" placeholder="Monedas" type="number">
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="example-button-container">
+                <button mat-button (click)="saveTaskChanges()">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-button (click)="cancelEdit()">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-card>
+</div>
+<div class="done-tasks">
+    <mat-card *ngFor="let task of tasks" class="tasks-done-card">
+        <div *ngIf="task.done_tasks">
+            <mat-card-header>
+                <mat-card-title>{{ task.task_tasks }}</mat-card-title>
+                <mat-card-subtitle>{{ task.coins_tasks }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="example-button-container">
+                <button mat-button (click)="doneTask(task)">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-button (click)="editTask(task)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="activeTask(task)">
+                    <mat-icon>move_to_inbox</mat-icon>
+                </button>
+                <button mat-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>
+<div class="active-tasks">
+    <mat-card *ngFor="let task of tasks" class="tasks-card">
+        <div *ngIf="task.active_tasks != true">
+            <mat-card-header>
+                <mat-card-title>{{ task.task_tasks }}</mat-card-title>
+                <mat-card-subtitle>{{ task.coins_tasks }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="example-button-container">
+                <button mat-button (click)="doneTask(task)">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-button (click)="editTask(task)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="activeTask(task)">
+                    <mat-icon>move_to_inbox</mat-icon>
+                </button>
+                <button mat-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

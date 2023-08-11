@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Parents } from '../models/parents.model';
 import { Injectable } from '@angular/core';
 
@@ -35,6 +35,16 @@ export class ParentsService {
 
     // Luego, usar los headers en la petición HTTP
     return this.http.get<Parents>(`${baseUrl}/${id}`, { headers });
+  }
+
+  parentLogin(credentials: { username_parents: string, password_parents: string }): Observable<any> {
+    const url = `${baseUrl}/login`;
+    return this.http.post(url, credentials).pipe(
+      map((response: any) => response), // Extract and return the response
+      catchError(error => {
+        throw error; // Rethrow the error
+      })
+    );
   }
 
   create(data: any): Observable<any> {

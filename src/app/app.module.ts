@@ -12,13 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './components/auth/login/login.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChildrenComponent
+    ChildrenComponent,
+    LoginComponent
     ],
   imports: [
     BrowserModule,

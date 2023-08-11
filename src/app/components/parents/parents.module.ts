@@ -12,7 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ParentsTasksComponent } from './parents-tasks/parents-tasks.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import { ParentsRewardsComponent } from './parents-rewards/parents-rewards.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -26,7 +27,10 @@ import { ParentsRewardsComponent } from './parents-rewards/parents-rewards.compo
     CommonModule,
     MatCardModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class ParentsModule { }

@@ -8,7 +8,7 @@
             <mat-card-subtitle>Coins: {{ child.coins_children }}</mat-card-subtitle>
         </mat-card-header>
         <div class="example-button-container">
-            <button mat-mini-fab aria-label="Tasks" [routerLink]="['/parents/tasks/', child._id]">
+            <button mat-mini-fab aria-label="Tasks" [routerLink]="['/parents/tasks/', child._id]" (click)="sendMessage()">
                 <mat-icon>task</mat-icon>
             </button>
             <button mat-mini-fab aria-label="Rewards" [routerLink]="['/parents/rewards/', child._id]">
