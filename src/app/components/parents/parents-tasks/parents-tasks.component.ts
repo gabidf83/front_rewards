@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, catchError, finalize, forkJoin, map, switchMap, tap } from 'rxjs';
 import { Children } from 'src/app/models/children.model';
 import { Tasks } from 'src/app/models/tasks.model';
 import { ChildrenService } from 'src/app/services/children.service';
-import { SharedService } from 'src/app/services/shared.service';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -37,7 +36,7 @@ export class ParentsTasksComponent implements OnInit {
     private route: ActivatedRoute,
     private tasksService: TasksService,
     private childrenService: ChildrenService,
-    private sharedService: SharedService
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -62,12 +61,8 @@ export class ParentsTasksComponent implements OnInit {
       },
       error: (e) => console.error(e)
     });
-
-    this.sharedService.currentMessage.subscribe((parentId) => {
-      this.parentId = parentId;
-      console.log(this.parentId);
-    });
-
+    this.parentId = localStorage.getItem('id') || '';
+    
   }
   retrieveChild(id_children: string): Observable<Children> {
     return this.childrenService.get(id_children).pipe(
@@ -93,6 +88,9 @@ export class ParentsTasksComponent implements OnInit {
         this.tasks.push(createdTask); // Agrega la nueva tarea a la lista actual de tareas
         this.showAddForm = false; // Oculta el formulario de creación después de guardar
         this.clearNewTask(); // Limpia los campos del formulario de creación
+        this.changeDetectorRef.detectChanges();
+        console.log(this.tasks);
+        this.ngOnInit();
       },
       (error) => {
         console.error('Error al crear la tarea:', error);
@@ -195,6 +193,15 @@ export class ParentsTasksComponent implements OnInit {
   cancelEdit() {
     // Lógica para cancelar la edición y revertir los cambios, si es necesario.
     this.selectedTask = null; // Reiniciar la tarea seleccionada
+  }
+
+  deleteTask(task: Tasks) {
+    this.tasksService.delete(task._id).subscribe(
+      (deletedTask: any) => {
+        console.log('Tarea borrada: ', task);
+      }
+    );
+    this.ngOnInit();
   }
 
 }

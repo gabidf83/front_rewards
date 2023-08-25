@@ -4,7 +4,6 @@ import { Children } from 'src/app/models/children.model';
 import { Tasks } from 'src/app/models/tasks.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { catchError, finalize } from 'rxjs/operators';
-import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-parents-children',
@@ -17,8 +16,7 @@ export class ParentsChildrenComponent implements OnChanges {
   loading: boolean = false;
 
   constructor(
-    private tasksService: TasksService,
-    private sharedService: SharedService
+    private tasksService: TasksService
     ) {}
 
   @Input() children: Children[] = [];
@@ -32,11 +30,8 @@ export class ParentsChildrenComponent implements OnChanges {
         .map(child => this.tasksService.getAllByChildrenId(child._id as string));
 
         console.log(this.parentId);
+        localStorage.setItem('id', this.parentId);
     }
-  }
-  sendMessage() {
-    console.log(this.parentId);
-    this.sharedService.changeMessage(this.parentId);
   }
 
 }

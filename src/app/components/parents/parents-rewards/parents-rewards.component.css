@@ -1,10 +1,35 @@
 .rewards-card {
     margin: 10px;
     width: 400px;
+    background-color: cadetblue;
 }
 
 .example-button-container {
     display: flex;
     justify-content: center;
-    width: 120px;
-  }
+    width: 200px;
+}
+
+.rewards-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.rewards-received-card {
+    margin: 10px;
+    width: 400px;
+    background-color: greenyellow;
+}
+
+.form-card {
+    width: 400px;
+    /* O el ancho deseado para el formulario */
+}
+
+.received-rewards {
+    opacity: 50%;
+}
+
+.active-rewards {
+    opacity: 25%;
+}

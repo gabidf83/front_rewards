@@ -66,7 +66,7 @@ export class TasksService {
     return this.http.put(`${baseUrl}/${id}`, data, { headers });
   }
 
-  delete(id: any): Observable<any> {
+  delete(_id: any): Observable<any> {
     // Agregar los headers necesarios en una variable HttpHeaders
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export class TasksService {
     });
 
     // Luego, usar los headers en la petición HTTP
-    return this.http.delete(`${baseUrl}/${id}`, { headers });
+    return this.http.delete(`${baseUrl}/${_id}`, { headers });
   }
 
   deleteAll(): Observable<any> {
